@@ -3,225 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cumple 🎂</title>
+  <title>Feliz Cumple 🎂</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Patrick Hand', cursive;
     }
 
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffcad4, #f4acb7, #9d8189);
-      background-size: 400% 400%;
-      animation: fondo 12s ease infinite;
+      background: #f2efe9;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-    }
-
-    @keyframes fondo {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .screen {
-      display: none;
-      width: 90%;
-      max-width: 420px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .active {
-      display: flex;
-      animation: fade 0.6s ease;
-    }
-
-    @keyframes fade {
-      from {opacity:0; transform: translateY(20px);}
-      to {opacity:1; transform: translateY(0);}
-    }
-
-    h1 {
-      font-size: 18px;
-      color: white;
-      background: rgba(0,0,0,0.35);
-      padding: 10px 14px;
-      border-radius: 12px;
-      line-height: 1.5;
-    }
-
-    button {
-      margin-top: 25px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 25px;
-      background: white;
-      color: #9d8189;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    /* COLLAGE LIBRE */
-    .collage {
       position: relative;
-      width: 100%;
-      height: 420px;
-      margin-top: 20px;
     }
 
-    .card {
+    /* FONDO CON MOVIMIENTO SUAVE */
+    body::before {
+      content: "";
       position: absolute;
-      width: 120px;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: moveBg 20s linear infinite;
+    }
+
+    @keyframes moveBg {
+      from { transform: translate(0,0); }
+      to { transform: translate(-100px, -100px); }
+    }
+
+    .contenedor {
+      position: relative;
+      max-width: 350px;
+      width: 90%;
+      padding: 20px;
+      z-index: 1;
+    }
+
+    /* TEXTO TIPO CARTA */
+    .mensaje {
+      font-size: 20px;
+      color: #333;
+      line-height: 1.6;
+      transform: rotate(-2deg);
+    }
+
+    /* FOTO TIPO POLAROID */
+    .foto {
+      margin-top: 25px;
       background: white;
-      padding: 6px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      opacity: 0;
-      animation: drop 0.6s ease forwards;
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    .card p {
-      font-size: 11px;
-      margin-top: 5px;
-      color: #444;
-      text-align: center;
-    }
-
-    /* posiciones */
-    .card:nth-child(1) { top: 10px; left: 10px; transform: rotate(-6deg); animation-delay: 0.2s;}
-    .card:nth-child(2) { top: 40px; right: 10px; transform: rotate(5deg); animation-delay: 0.4s;}
-    .card:nth-child(3) { bottom: 80px; left: 20px; transform: rotate(3deg); animation-delay: 0.6s;}
-    .card:nth-child(4) { bottom: 40px; right: 20px; transform: rotate(-4deg); animation-delay: 0.8s;}
-
-    @keyframes drop {
-      0% { transform: translateY(-100px) scale(0.8); opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    .card:hover {
-      transform: scale(1.1) rotate(0deg);
-      z-index: 10;
-    }
-
-    .mensaje-final {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 85%;
-      background: rgba(255,255,255,0.85);
       padding: 10px;
-      border-radius: 12px;
-      font-size: 13px;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: rotate(3deg);
+      transition: 0.3s;
+    }
+
+    .foto img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .foto:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+
+    /* DETALLE CINTA */
+    .tape {
+      position: absolute;
+      width: 80px;
+      height: 20px;
+      background: rgba(255,255,200,0.7);
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-5deg);
+      border-radius: 4px;
     }
 
     @media (max-width: 480px) {
-      h1 { font-size: 16px; }
-      .collage { height: 380px; }
-      .card { width: 100px; }
-      .mensaje-final { font-size: 12px; }
+      .mensaje {
+        font-size: 18px;
+      }
     }
+
   </style>
 </head>
 
 <body>
 
-<audio id="audio1" src="tema1.mp3" loop></audio>
-<audio id="audio2" src="tema2.mp3" loop></audio>
+<div class="contenedor">
 
-<!-- PANTALLA 1 -->
-<div class="screen active">
-  <h1>
+  <div class="mensaje">
     KANYEE, como estas??<br><br>
-    Bueno este es mi regalito / mensajito pro de feliz cumpleaños 🎉
-  </h1>
+    Bueno este es mi mensajito pro de feliz cumpleaños 🎉<br><br>
+    Feliz cumple a la más copada del grupo, a la más loca y a la que le pone la mejor energía a todo 🔥<br><br>
+    Te quiero amiga 😎
+  </div>
 
-  <button onclick="next()">Continuar 😎</button>
-</div>
-
-<!-- PANTALLA 2 -->
-<div class="screen">
-
-  <h1>FELIZ CUMPLE 🎂</h1>
-
-  <div class="collage">
-
-    <div class="card">
-      <img src="foto1.jpg">
-      <p>la más copada del grupo 😎</p>
-    </div>
-
-    <div class="card">
-      <img src="foto2.jpg">
-      <p>la que le pone la mejor energía 🔥</p>
-    </div>
-
-    <div class="card">
-      <img src="foto3.jpg">
-      <p>la más loca lejos 😂</p>
-    </div>
-
-    <div class="card">
-      <img src="foto4.jpg">
-      <p>momentos god 🫶</p>
-    </div>
-
-    <div class="mensaje-final">
-      y nada JAJAJAJAJA 😂<br>
-      feliz cumple Caia, te quiero amiga ❤️
-    </div>
-
+  <div class="foto">
+    <div class="tape"></div>
+    <img src="foto.jpg">
   </div>
 
 </div>
-
-<script>
-let current = 0;
-const screens = document.querySelectorAll(".screen");
-
-const audio1 = document.getElementById("audio1");
-const audio2 = document.getElementById("audio2");
-
-function next(){
-  screens[current].classList.remove("active");
-  current++;
-  screens[current].classList.add("active");
-
-  audio1.pause();
-  audio1.currentTime = 0;
-  audio2.play();
-}
-
-document.body.addEventListener("click", () => {
-  if(audio1.paused){
-    audio1.play();
-  }
-}, { once: true });
-</script>
 
 </body>
 </html>

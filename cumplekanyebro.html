@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cumple 🎂</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -16,22 +16,30 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #8EC5FC, #E0C3FC, #F9F586);
+      background: linear-gradient(135deg, #ffcad4, #f4acb7, #9d8189);
+      background-size: 400% 400%;
+      animation: fondo 12s ease infinite;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
+    @keyframes fondo {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .screen {
       display: none;
-      text-align: center;
-      padding: 24px;
       width: 90%;
       max-width: 420px;
       background: rgba(255,255,255,0.15);
       backdrop-filter: blur(12px);
       border-radius: 20px;
+      padding: 20px;
+      text-align: center;
       box-shadow: 0 8px 25px rgba(0,0,0,0.25);
       flex-direction: column;
       align-items: center;
@@ -39,58 +47,89 @@
 
     .active {
       display: flex;
-      animation: fadeIn 0.6s ease;
+      animation: fade 0.6s ease;
     }
 
-    @keyframes fadeIn {
-      from {opacity:0; transform: translateY(30px);}
+    @keyframes fade {
+      from {opacity:0; transform: translateY(20px);}
       to {opacity:1; transform: translateY(0);}
     }
 
     h1 {
+      font-size: 18px;
       color: white;
       background: rgba(0,0,0,0.35);
-      padding: 12px 18px;
-      border-radius: 15px;
-      font-size: 18px;
+      padding: 10px 14px;
+      border-radius: 12px;
       line-height: 1.5;
     }
 
     button {
-      margin-top: 30px;
-      padding: 14px 26px;
+      margin-top: 25px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       background: white;
-      color: #6a5acd;
+      color: #9d8189;
       font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
       transition: 0.2s;
     }
 
     button:hover {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
 
-    img {
-      width: 100%;
-      border-radius: 16px;
+    /* COLLAGE AESTHETIC */
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin-top: 20px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
 
-    /* Confetti */
-    .confetti {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      animation: fall linear infinite;
+    .card {
+      background: white;
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transform: rotate(-1deg);
+      animation: aparecer 0.6s ease;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-100px); }
-      100% { transform: translateY(100vh); }
+    .card:nth-child(even) {
+      transform: rotate(1deg);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .card p {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #444;
+    }
+
+    .mensaje-final {
+      grid-column: span 2;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      padding: 10px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 10px;
+    }
+
+    @keyframes aparecer {
+      from {opacity:0; transform: scale(0.8);}
+      to {opacity:1; transform: scale(1);}
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      h1 { font-size: 16px; }
+      .card p { font-size: 11px; }
     }
   </style>
 </head>
@@ -101,29 +140,50 @@
 <audio id="audio1" src="tema1.mp3" loop></audio>
 <audio id="audio2" src="tema2.mp3" loop></audio>
 
-<div id="confetti-container"></div>
-
 <!-- PANTALLA 1 -->
 <div class="screen active">
   <h1>
-    KANYEE, como estas?? <br><br>
-    Bueno este es mi regalito / mensajito pro de feliz cumpleaños, algo diferente bro 🎉
+    KANYEE, como estas??<br><br>
+    Bueno este es mi regalito / mensajito pro de feliz cumpleaños 🎉
   </h1>
 
   <button onclick="next()">Continuar 😎</button>
 </div>
 
-<!-- PANTALLA 2 -->
+<!-- PANTALLA 2 COLLAGE -->
 <div class="screen">
-  <h1>
-    FELIZ CUMPLE A LA MAS COPADARDA DEL GRUPO 🎉<br><br>
-    a la que mas buena energia le pone a todo,<br>
-    a la mas loca,<br><br>
-    y nada JAJAJAJAJA 😂<br><br>
-    Feliz cumple Caia te quiero amiga ❤️
-  </h1>
 
-  <img src="foto.jpg">
+  <h1>FELIZ CUMPLE 🎂</h1>
+
+  <div class="collage">
+
+    <div class="card">
+      <img src="foto1.jpg">
+      <p>la más copada del grupo 😎</p>
+    </div>
+
+    <div class="card">
+      <img src="foto2.jpg">
+      <p>la que le pone la mejor energía 🔥</p>
+    </div>
+
+    <div class="card">
+      <img src="foto3.jpg">
+      <p>la más loca lejos 😂</p>
+    </div>
+
+    <div class="card">
+      <img src="foto4.jpg">
+      <p>momentos god 🫶</p>
+    </div>
+
+    <div class="mensaje-final">
+      y nada JAJAJAJAJA 😂<br>
+      feliz cumple Caia, te quiero amiga ❤️
+    </div>
+
+  </div>
+
 </div>
 
 <script>
@@ -133,7 +193,6 @@ const screens = document.querySelectorAll(".screen");
 const audio1 = document.getElementById("audio1");
 const audio2 = document.getElementById("audio2");
 
-// cambiar pantalla + musica
 function next(){
   screens[current].classList.remove("active");
   current++;
@@ -144,28 +203,12 @@ function next(){
   audio2.play();
 }
 
-// iniciar musica con primer click
+// iniciar música con interacción
 document.body.addEventListener("click", () => {
   if(audio1.paused){
     audio1.play();
   }
 }, { once: true });
-
-// confetti
-const container = document.getElementById("confetti-container");
-const colors = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ffffff"];
-
-for(let i=0;i<100;i++){
-  const c = document.createElement("div");
-  c.classList.add("confetti");
-
-  c.style.background = colors[Math.floor(Math.random()*colors.length)];
-  c.style.left = Math.random()*100 + "vw";
-  c.style.animationDuration = (3 + Math.random()*3) + "s";
-  c.style.animationDelay = Math.random()*5 + "s";
-
-  container.appendChild(c);
-}
 </script>
 
 </body>

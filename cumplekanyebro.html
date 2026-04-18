@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cumple 🎂</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -80,25 +80,23 @@
       transform: scale(1.05);
     }
 
-    /* COLLAGE AESTHETIC */
+    /* COLLAGE LIBRE */
     .collage {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      position: relative;
+      width: 100%;
+      height: 420px;
       margin-top: 20px;
     }
 
     .card {
+      position: absolute;
+      width: 120px;
       background: white;
-      padding: 8px;
+      padding: 6px;
       border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-      transform: rotate(-1deg);
-      animation: aparecer 0.6s ease;
-    }
-
-    .card:nth-child(even) {
-      transform: rotate(1deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      opacity: 0;
+      animation: drop 0.6s ease forwards;
     }
 
     .card img {
@@ -107,36 +105,51 @@
     }
 
     .card p {
-      font-size: 12px;
-      margin-top: 6px;
+      font-size: 11px;
+      margin-top: 5px;
       color: #444;
+      text-align: center;
+    }
+
+    /* posiciones */
+    .card:nth-child(1) { top: 10px; left: 10px; transform: rotate(-6deg); animation-delay: 0.2s;}
+    .card:nth-child(2) { top: 40px; right: 10px; transform: rotate(5deg); animation-delay: 0.4s;}
+    .card:nth-child(3) { bottom: 80px; left: 20px; transform: rotate(3deg); animation-delay: 0.6s;}
+    .card:nth-child(4) { bottom: 40px; right: 20px; transform: rotate(-4deg); animation-delay: 0.8s;}
+
+    @keyframes drop {
+      0% { transform: translateY(-100px) scale(0.8); opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .card:hover {
+      transform: scale(1.1) rotate(0deg);
+      z-index: 10;
     }
 
     .mensaje-final {
-      grid-column: span 2;
-      font-family: 'Playfair Display', serif;
-      font-size: 14px;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      background: rgba(255,255,255,0.85);
       padding: 10px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 10px;
+      border-radius: 12px;
+      font-size: 13px;
     }
 
-    @keyframes aparecer {
-      from {opacity:0; transform: scale(0.8);}
-      to {opacity:1; transform: scale(1);}
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 480px) {
       h1 { font-size: 16px; }
-      .card p { font-size: 11px; }
+      .collage { height: 380px; }
+      .card { width: 100px; }
+      .mensaje-final { font-size: 12px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- AUDIOS -->
 <audio id="audio1" src="tema1.mp3" loop></audio>
 <audio id="audio2" src="tema2.mp3" loop></audio>
 
@@ -150,7 +163,7 @@
   <button onclick="next()">Continuar 😎</button>
 </div>
 
-<!-- PANTALLA 2 COLLAGE -->
+<!-- PANTALLA 2 -->
 <div class="screen">
 
   <h1>FELIZ CUMPLE 🎂</h1>
@@ -203,7 +216,6 @@ function next(){
   audio2.play();
 }
 
-// iniciar música con interacción
 document.body.addEventListener("click", () => {
   if(audio1.paused){
     audio1.play();
